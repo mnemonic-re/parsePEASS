@@ -4,7 +4,7 @@
 - Copy "parsers" directory from PEASS_ng into /opt/parsePEASS/parsers
 - Copy 'parsePEASS.sh' into /opt/parsePEASS/parsePEASS.sh
 - This way you have a clean surface with folder parsers and script outside.
-- Put raw output file inside /opt/totalparser for parsing and creating HTML or PDF files. 
+- Put raw output file inside /opt/parsePEASS for parsing and creating HTML or PDF files. 
 - chmod +x parsePEASS.sh
 - Should look like this:
 

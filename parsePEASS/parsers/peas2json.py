@@ -129,7 +129,7 @@ def parse_line(line: str):
 
     elif is_section(line, INFO_PATTERN):
         title = parse_title(line)
-        C_SECTION["infos"].append(title)
+        #C_SECTION["infos"].append(title)
     
     #If here, then it's text
     else:

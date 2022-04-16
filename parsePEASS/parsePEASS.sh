@@ -2,7 +2,7 @@
 
 # -------------------------------------------------------------------
 # sh = PEASS_ng Output file Parser and Converter
-# v = 1.1
+# v = 1.2
 # id = malloc84 || mnemonic-re @ github
 # -------------------------------------------------------------------
 
@@ -15,10 +15,31 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 
+ARG=$1
+
 echo "$title"
 PS3="$prompt "
 
-echo -e "Convert PEASS_ng (linpeas or winpeas) output file to HTML or PDF readable format"
+parsepeassinfo()
+{
+    echo ''
+    echo -e "${BLUE}Output file conversion options: ${NO}"
+    echo -e "${GREEN}1 - Convert ${YELLOW}"${file[$input]}" ${GREEN}to readable HTML file."
+    echo -e "${GREEN}2 - Convert ${YELLOW}"${file[$input]}" ${GREEN}to readable PDF file."
+    echo -e "${GREEN}3 - Convert ${YELLOW}"${file[$input]}" ${GREEN}to parsable JSON file."
+    echo -e "${BLUE}4 - Restart Conversion script to process another file.${NO}"
+    echo -e "${RED}5 - Exit Conversion script.${NO}"
+    echo ''    
+}
+
+# debug KEKW
+if [[ $ARG == info ]]; then
+    parsepeassinfo
+    exit 1
+fi
+
+echo -e "${GREEN}Convert PEASS_ng (linpeas or winpeas) output file to HTML or PDF readable format${NO}"
+echo -e "${GREEN}About: ./parsePEASS info${NO}"
 echo -e "Select the ${YELLOW}*.out ${NO}PEASS output file to process."
 echo ''
 
@@ -36,14 +57,7 @@ echo ''
 read -p "Select *.out file to process (number): " input 
 echo -e "File to process: "${YELLOW}"${file[$input]}"${NO}""
 
-echo ''
-echo -e "${BLUE}Output file conversion options: ${NO}"
-echo -e "${GREEN}1 - Convert ${YELLOW}"${file[$input]}" ${GREEN}to readable HTML file."
-echo -e "${GREEN}2 - Convert ${YELLOW}"${file[$input]}" ${GREEN}to readable PDF file."
-echo -e "${GREEN}3 - Convert ${YELLOW}"${file[$input]}" ${GREEN}to parsable JSON file."
-echo -e "${BLUE}4 - Restart Conversion script to process another file.${NO}"
-echo -e "${RED}5 - Exit Conversion script.${NO}"
-echo ''
+
 
 options=("HTML" "PDF" "JSON" "RESTART" "EXIT")
 select opt in "${options[@]}"
@@ -141,6 +155,7 @@ do
             echo -e "${BLUE}[+] Bye!${NO}"
             break
             ;;
-        *) echo -e "${RED}Non existing option.${NO} $REPLY";;
+        *) echo -e "${RED}Non existing option.${NO} $REPLY"
+            ;;
     esac
 done
